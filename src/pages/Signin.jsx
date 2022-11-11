@@ -28,20 +28,21 @@ const Signin = () => {
         }
         navigate("/home");
         return response;
-      });
-    // .then((response) => {
-    //   if (response) {
-    //     console.log(response, "2nd");
-    //     const token = localStorage.getItem("access_token");
-    //     axios
-    //       .get("http://103.171.181.146:7000/myapp/Profilecard/", {
-    //         access_token: token,
-    //       })
-    //       .then((response) => {
-    //         console.log(response);
-    //       });
-    //   }
-    // });
+      })
+    .then((response) => {
+      const token = localStorage.getItem("access_token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+      if (response) {
+        console.log(response, "2nd");
+        axios
+          .get("http://103.171.181.146:7000/myapp/Profilecard/",config)
+          .then((response) => {
+            console.log(response);
+          });
+      }
+    });
     console.log(signinDetails);
   };
 
